@@ -1,7 +1,7 @@
 {
-  "name": "market",
+  "name": "nodeserver",
   "version": "1.0.0",
-  "description": "",
+  "description": "nodeserver test",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  },
+  "devDependencies": {}
 }
