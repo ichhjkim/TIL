@@ -1,12 +1,12 @@
 var express = require('express');
-
 var app = express();
-
-var router = app.Router();
-
+var router = express.Router();
+var path = require('path')
 // 이젠 app 대신 router 로!
-router.get('/main', function(req, res) {
-    res.sendFile(__dirname+'/public/main.htm')
+
+router.get('/', function(req, res) {
+    console.log('???');
+    res.sendFile(path.join(__dirname, '../public/main.htm'))
 
 })
 

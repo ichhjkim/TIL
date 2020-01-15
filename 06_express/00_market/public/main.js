@@ -1,1 +1,1 @@
-console.log('main.js가 로드됨');
+console.log('잘로드됨');

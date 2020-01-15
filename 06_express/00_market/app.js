@@ -2,38 +2,39 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
 var mysql  =require('mysql');
-var main = require('./router/main')
+var main = require('./router/main.js')
+
+app.listen(3000, function() {
+    console.log('start!!');
+}); 
 
 var connection = mysql.createConnection({
 
     host: 'localhost',
-    
     port:3000,
-    
     user:'root',
-    
     password:'asdf1234',
-    
     database: 'jsman'
     
     })
-    connection.connect();
+connection.connect();
+
 // express 불러옴
-app.use('/main', main); // /main에 대한  router은 main.js를 써
+app.use('/main', main); // /main에 대한 router은 main.js를 써
 // localhost 3000으로 열거다!
-app.listen(3000, function() {
-    console.log('start!!');
-}); // -- 비동기로 node는 동작하기 때문에 밑에 있는 console.log보다 나중에 실행됨
+// -- 비동기로 node는 동작하기 때문에 밑에 있는 console.log보다 나중에 실행됨
 // 3000이라는 포트를 기반으로 실행됨
 console.log('asdfasdfasf');
 app.set('view engine', 'ejs') // view engine은 ejs로 할거야
 // 위에게 먼저 실행됨! -- 동기적인 애가 먼저 실행되고
 app.use(express.static('public')) // static을 public으로 기억한다는 의미
+
+/*
 app.get('/', function(req, res){
     // res.send("<h1>hi friend!</h1>")
     res.sendFile(__dirname+"/public/main.htm")
 })
-
+*/
 
 // json으로 응답을 받을 때는 
 app.use(bodyParser.json())
