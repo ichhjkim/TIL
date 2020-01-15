@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>email Form</title>
+</head>
+<body>
+    <form action="/login" method="post">
+        email:<input type="text" name="email">
+        password: <input type="text" name="password">
+        <input type="submit">
+        
+    </form>
+
+    <div class="result"></div>
+    <script>
+        document.querySelector('.ajaxsend').addEventListener('click', function(){
+            var email = document.getElementsByName('email')[0].value
+            var password = document.getElementsByName('password')[0].value
+            var inputData = document.forms[0].elements[0].value;
+            sendAjax('//127.0.0.1:3000/login', {'email':email, "password":password}); // sendAjax: --로 inputData를 보냄
+        })
+        function sendAjax(url, data) {
+            data = JSON.stringify(data);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-Type', "application/json") // sever로 보낼때 json으로 보낼 것이라는 뜨
+            xhr.send(data); // data가 object로 날아감
+
+            // data가 로드되면
+            xhr.addEventListener('load', function() {
+                var result = xhr.responseText;
+                result = JSON.parse(result);
+                if (result.result != "ok") return;
+                document.querySelector('.result').innerHTML = result.email;
+                
+            })
+        }
+    </script>
+</body>
+</html>
