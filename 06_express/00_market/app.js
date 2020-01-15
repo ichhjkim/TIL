@@ -1,7 +1,25 @@
 var express = require('express');
-// express 불러옴
 var bodyParser = require('body-parser')
-var app = express()
+var app = express();
+var mysql  =require('mysql');
+var main = require('./router/main')
+
+var connection = mysql.createConnection({
+
+    host: 'localhost',
+    
+    port:3000,
+    
+    user:'root',
+    
+    password:'asdf1234',
+    
+    database: 'jsman'
+    
+    })
+    connection.connect();
+// express 불러옴
+app.use('/main', main); // /main에 대한  router은 main.js를 써
 // localhost 3000으로 열거다!
 app.listen(3000, function() {
     console.log('start!!');
@@ -16,10 +34,7 @@ app.get('/', function(req, res){
     res.sendFile(__dirname+"/public/main.htm")
 })
 
-app.get('/main', function(req, res) {
-    res.sendFile(__dirname+'/public/main.htm')
 
-})
 // json으로 응답을 받을 때는 
 app.use(bodyParser.json())
 // encoding 이면 아스키 형태로 치환 urlencoded!
