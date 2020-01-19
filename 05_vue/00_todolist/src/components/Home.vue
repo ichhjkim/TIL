@@ -1,5 +1,12 @@
 <template>
+
 <v-container>
+  <v-flex xs 12 text-xs-center>
+    <h1>Todo List</h1>
+  <p>전체 할일: {{todoList.length}}</p>
+  <p>완료된 할일:{{countDone}}</p>
+  <p>남은 할일 : {{todoList.length-countDone}}</p>
+    </v-flex>
     <v-layout row wrap>
       <v-flex xs6>
         <List
@@ -9,7 +16,9 @@
             ></List>
       </v-flex>
         <v-flex xs6>
-            <ListAdd @listAdd="listAdd">
+            <ListAdd 
+            @listEdit="listEdit"
+            @listAdd="listAdd">
               
               </ListAdd> 
         </v-flex>
@@ -43,6 +52,18 @@ export default {
     listdelete(index){
       this.todoList.splice(index, 1);
       // 1개 만 지워죠
+    },
+    listEdit(memo, index) {
+      this.todoList[index].memo = memo
+    }
+  },
+  computed: {
+    countDone() {
+      let count = 0
+      this.todoList.forEach(list=> {
+        if (list.status ==='done') count++;
+      })
+      return count
     }
   }
 }

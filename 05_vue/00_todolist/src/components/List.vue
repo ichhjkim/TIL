@@ -1,7 +1,7 @@
 <template>
 <div>
     <v-card
-    class="pa-3"
+    class="pa-3 mb-3"
     :class="{'done':list.status==='done'}"
      v-for="(list, index) in listver"
      :key="index">
@@ -19,6 +19,11 @@
         <v-btn 
         @click="$emit('listdelete', index)"
         fab flat small red>제거</v-btn>
+        <v-btn
+        @click="listEdit(list.memo, index)"
+        v-if="list.status==='created'"
+        fab flat small color="orange"
+        >edit</v-btn>
     </v-card>
 </div>
 </template>
@@ -26,11 +31,16 @@
 <script>
 import List from './List'
 import ListAdd from './ListAdd'
-
+import {eventBus} from "../main"
 export default {
     props: [
         "listver"
         ],
+    methods: {
+        listEdit(memo, index){
+            eventBus.listEdit(memo, index)
+        }
+    }
 
 }
 </script>
