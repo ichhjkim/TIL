@@ -39,8 +39,37 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
-export default {
+import axios from "axios"
 
+// const axios = require('axios'); === node.js 버젼
+
+export default {
+    data() {
+        return {
+            email: null,
+            password: null
+        }
+    },
+    computed: {
+        ...mapState(['isLogin', 'isLoginError'])
+
+    },
+    methods: {
+        ...mapActions(['login']),
+        test () {
+            axios
+            .get('https://reqres.in/api/users?page=2')
+            .then(res => {console.log(res);
+                // 콜백함수에서 function()을 쓰게 되면 콜백함수 내를 의미하기 때문에
+                // 애로우 func을 사용해야한다
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+            });
+                    }
+    }
 }
 </script>
 
