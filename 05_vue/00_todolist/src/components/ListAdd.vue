@@ -6,6 +6,7 @@
           value=""
           hint="Hint text"
         ></v-textarea>
+
         <v-btn v-if="mode==='edit'" @click="listEdit">리스트수정</v-btn>
         <v-btn v-else @click="listAdd">리스트추가</v-btn>
   </div>
