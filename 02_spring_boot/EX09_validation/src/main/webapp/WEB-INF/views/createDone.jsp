@@ -10,6 +10,6 @@
 createDonePage.jsp
 
 name: ${dto.writer} <br>
-content: ${dto.writer}
+content: ${dto.content}
 </body>
 </html>
