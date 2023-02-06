@@ -10,6 +10,14 @@ public class FieldLogTrace implements LogTrace{
     private static final String COMPLETE_PREFIX = "<--";
     private static final String EX_PREFIX = "<X-";
 
+    /**
+     * 동시성이 발생하는 이유
+     * 동시에 여러 사용자가 요청하게 되면, 여러 쓰레드가 동시에 애플리케이션 로직을 수행한다.
+     * 따라서, 로그는 섞여서 호출된다.
+     *
+     * FieldLogTrace는 싱글톤으로 등록된 스프링 빈이기 때문에,
+     * 여러 쓰레드에서 동시에 접근 해서 문제가 발생한다.
+     */
     private TraceId traceIdHolder; // TraceID 동기화, 추후 동시성 이슈 발생할 것
 
     @Override
