@@ -1,5 +1,9 @@
 package com.strategy.strategy;
 
+import com.strategy.strategy.code.strategy.ContextV1;
+import com.strategy.strategy.code.strategy.Strategy;
+import com.strategy.strategy.code.strategy.StrategyLogic1;
+import com.strategy.strategy.code.strategy.StrategyLogic2;
 import com.strategy.template.code.AbstractTemplate;
 import com.strategy.template.code.SubClassLogic1;
 import com.strategy.template.code.SubClassLogic2;
@@ -14,37 +18,48 @@ public class ContextV1Test {
         logic2();
     }
 
-    /**
-     * 템플릿 메서드 패턴 적용
-     */
     @Test
-    void templateMethodV1() {
-        AbstractTemplate abstractTemplate1 = new SubClassLogic1();
-        abstractTemplate1.execute();
-        AbstractTemplate abstractTemplate2 = new SubClassLogic2();
-        abstractTemplate2.execute();
+    void strategyV1() {
+        StrategyLogic1 strategyLogic1 = new StrategyLogic1();
+        ContextV1 contextV1 = new ContextV1(strategyLogic1);
+        contextV1.execute();
+
+        StrategyLogic2 strategyLogic2 = new StrategyLogic2();
+        ContextV1 contextV2 = new ContextV1(strategyLogic2);
+        contextV2.execute();
     }
 
     @Test
-    void templateMethodV2() {
-        // 객체를 생성하며 동시에 구현할 수 있다.
-        // 바로 자식 클래스를 정의할 수 있다.
-        AbstractTemplate abstractTemplate1 = new AbstractTemplate() {
+    void strategyV2_익명내부클래스() {
+        Strategy strategy1 = new Strategy() {
             @Override
-            protected void call() {
-                log.info("클래스1");
+            public void call() {
+                log.info("내부 익명클래스 로직1 !!!!");
             }
         };
-        log.info("Class Name1={}", abstractTemplate1.getClass());
-        abstractTemplate1.execute();
-        AbstractTemplate abstractTemplate2 = new AbstractTemplate() {
+        log.info("익명 내부 클래스={}", strategy1.getClass());
+        ContextV1 contextV1 = new ContextV1(strategy1);
+        contextV1.execute();
+
+        Strategy strategy2 = new Strategy() {
             @Override
-            protected void call() {
-                log.info("클래스2");
+            public void call() {
+                log.info("내부 익명클래스 로직2 !!!!");
             }
         };
-        log.info("Class Name2={}", abstractTemplate2.getClass());
-        abstractTemplate2.execute();
+        log.info("익명 내부 클래스={}", strategy2.getClass());
+        ContextV1 contextV2 = new ContextV1(strategy2);
+        contextV2.execute();
+    }
+
+    @Test
+    void strategyV3_익명내부클래스_람다() {
+        // 단, 람다로 구현하려면 해당 인터페이스에 메서드가 '한 개'만 있어야 한다!!
+        ContextV1 contextV1 = new ContextV1(()-> log.info("내부 익명클래스 로직1 !!!!"));
+        contextV1.execute();
+
+        ContextV1 contextV2 = new ContextV1(()-> log.info("내부 익명클래스 로직2 !!!!"));
+        contextV2.execute();
     }
 
     private void logic1() {
