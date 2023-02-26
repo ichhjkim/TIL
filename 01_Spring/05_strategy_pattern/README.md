@@ -27,3 +27,21 @@ Context가 파라미터로 Strategy를 받을 수 있도록한다. 상황에 맞
 
 필드로 전달하면, 한 번 `Context`와 `Strategy`를 조립하면 다시 설정할 필요가 없고,
 파라미터로 전달하면, 그 때마다 `Strategy`를 전달할 수 있어 상황에 맞게 유연하게 적용할 수 있다.
+
+## Template CallBack Pattern
+
+> **콜백 정의**
+> 프로그래밍에서 콜백또는 콜애프터함수는 다른 코드의 인수로서 넘겨주는 실행가능한 코드를 말한다.
+> 콜백을 넘겨받는 코드는 이 콜백을 필요에 따라서 즉시 실행할 수도 있고, 나중에 실행할 수도 있다.
+> 
+
+전략 패턴에서는 'Context'가 템플릿 역할을 하고,
+'Strategy'가 콜백 역할을 한다.
+
+#### 스프링 내부의 Template CallBack Pattern
+
+- `JdbcTemplate`
+- `RestTemplate`
+- `RedisTemplate`
+- `TransactionTemplate`
+스프링 내부에서 '**Template'이 있으면 Template CallBack Pattern으로 만들어져 있다고 생각하면 된다.

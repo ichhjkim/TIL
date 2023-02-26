@@ -6,6 +6,8 @@ import com.strategy.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 public class ContextV2Test {
 
@@ -24,5 +26,19 @@ public class ContextV2Test {
         ContextV2 contextV2 = new ContextV2();
         contextV2.execute(()-> log.info("익명 람다1 실행"));
         contextV2.execute(()-> log.info("익명 람다2 실행"));
+    }
+
+    @Test
+    void 테스트() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        byte year = Integer.valueOf(localDateTime.getYear()).byteValue();
+        byte month = Integer.valueOf(localDateTime.getMonthValue()).byteValue();
+        byte day = Integer.valueOf(localDateTime.getDayOfMonth()).byteValue();
+        byte hour = Integer.valueOf(localDateTime.getHour()).byteValue();
+        byte mi = Integer.valueOf(localDateTime.getMinute()).byteValue();
+        byte second = Integer.valueOf(localDateTime.getSecond()).byteValue();
+        byte nano = Integer.valueOf(localDateTime.getNano()).byteValue();
+        int result = year + month + day + hour + mi + second + nano;
+        log.info("#### {}",result);
     }
 }
