@@ -27,6 +27,21 @@ public class AbstractTemplateMethodTest {
     }
 
     @Test
+    void test() {
+        try {
+            System.out.println("TEST");
+            throw new IllegalArgumentException("TEST");
+        } catch (Exception e) {
+            log.error("{} Exception",  e.getMessage());
+            throw e;
+        } finally {
+            log.error("print");
+            System.out.println("finally");
+
+        }
+    }
+
+    @Test
     void templateMethodV2() {
         // 객체를 생성하며 동시에 구현할 수 있다.
         // 바로 자식 클래스를 정의할 수 있다.
